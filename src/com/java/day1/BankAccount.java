@@ -7,19 +7,19 @@ import com.java.day1.exception.InvalidAmountException;
  * BankAccount class to manage bank account
  */
 public class BankAccount {
-	String accNumber;
-	String accHolderName;
+	String accountNumber;
+	String accountHolderName;
 	double balance;
 
 	public BankAccount(String accNumber, String accHolderName, double balance) {
 		super();
-		this.accNumber = accNumber;
-		this.accHolderName = accHolderName;
+		this.accountNumber = accNumber;
+		this.accountHolderName = accHolderName;
 		this.balance = balance;
 	}
 
 	void deposit(double amount) throws InvalidAmountException {
-		if (amount < 0)
+		if (amount <= 0)
 			throw new InvalidAmountException("Invalid amount:" + amount);
 		this.balance = this.balance + amount;
 		System.out.println("Depoisted " + amount);
@@ -27,7 +27,7 @@ public class BankAccount {
 	}
 
 	void withdraw(double amount) throws InvalidAmountException, InsufficientBalanceException {
-		if (amount < 0)
+		if (amount <= 0)
 			throw new InvalidAmountException("Invalid amount:" + amount);
 		if (amount > this.balance) {
 			throw new InsufficientBalanceException("Insufficient Balance");
@@ -37,18 +37,25 @@ public class BankAccount {
 	}
 
 	void printAccountDetails() {
-		System.out.println("Account details:" + this.accHolderName + " - " + this.accNumber + " - " + this.balance);
+		System.out.println("Account details:" + this.accountHolderName + " - " + this.accountNumber + " - " + this.balance);
 	}
 
-	static public void main(String[] args) throws InvalidAmountException, InsufficientBalanceException {
+	static public void main(String[] args) {
 		BankAccount b = new BankAccount("AC001", "Aparna", 10000);
-		b.deposit(20000);
-		b.printAccountDetails();
-		b.withdraw(5000);
-		b.printAccountDetails();
+		try {
+			b.deposit(20000);
+			b.printAccountDetails();
+			b.withdraw(5000);
+			b.printAccountDetails();
+			
+			b.deposit(-3);
+			b.withdraw(500000000);
+		} catch (InvalidAmountException e) {
+			e.printStackTrace();
+		} catch (InsufficientBalanceException e) {
+			e.printStackTrace();
+		}
 		
-		//b.deposit(-3);
-		b.withdraw(500000000);
 	}
 
 }
