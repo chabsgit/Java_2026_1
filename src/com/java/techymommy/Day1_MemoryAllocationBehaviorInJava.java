@@ -16,7 +16,6 @@ class Book{
 public class Day1_MemoryAllocationBehaviorInJava {
 
 	
-	
 	static public void main(String args[]) {
 		
 		//primitive
@@ -29,8 +28,12 @@ public class Day1_MemoryAllocationBehaviorInJava {
 		//object behavior
 		Book b = new Book("The secret", 200);
 		b.printBookDetails();
+		
+		
 		method2(b);
 		b.printBookDetails();
+		
+		b.name = "The secret";
 		
 		method3(b);
 		b.printBookDetails();
