@@ -1,6 +1,7 @@
 package com.java.leetcode;
 
 import java.util.Stack;
+import java.util.HashMap;
 
 public class ValidParentheses {
 
@@ -10,7 +11,7 @@ public class ValidParentheses {
 		System.out.println(validParentheses("([])"));
 		System.out.println(validParentheses("([)]"));
 		System.out.println(validParentheses("(}"));
-		System.out.println(validParentheses("(){}(())"));
+		System.out.println(validParentheses("("));
 	}
 	
 	/**
@@ -26,21 +27,22 @@ public class ValidParentheses {
 	public static boolean validParentheses(String str) {
 		Stack<Character> stack = new Stack<Character>();
 		
-		for(char ch: str.toCharArray()) {
-			if(ch == '{' || ch == '(' || ch == '[')
-				stack.push(ch);
-			else {
-				char ch1 = stack.peek();
-				if((ch == ')' && ch1 == '(')||(ch == ']' && ch1 == '[')||(ch == '}' && ch1 == '{')) {
-					stack.pop();
-				}
-				else
-					return false;
-			}
-				
-		}
+		HashMap<Character,Character> map = new HashMap<>();
 		
-		return true;
+		map.put('(', ')');
+		map.put('[', ']');
+		map.put('{', '}');
+		
+		for(char ch: str.toCharArray()) {
+			
+			if(!stack.isEmpty() && map.containsKey(stack.peek()) && ch == map.get(stack.peek()))
+				stack.pop();
+			else {
+				stack.push(ch);
+			}
+		}
+		return stack.isEmpty();
+		
 	}
 
 }
