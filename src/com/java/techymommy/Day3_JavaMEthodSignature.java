@@ -33,6 +33,9 @@ public class Day3_JavaMEthodSignature {
 		Parent p = new Child();
 		Parent p1 = new Parent();
 		Child p2 = new Child();
+		
+		 
+		
 		try {
 			p.show();
 			p1.show();
@@ -49,10 +52,17 @@ class Parent {
 	void show() throws Exception {
 		System.out.println("parent");
 	}
+	
+	Number getValue() { return 10; }
+	
+//compi - duplicate method
+//	int add(int a, int b) { return a+b; }
+//	 long add(int a, int b) {	 return a+b; }
 }
 
 class Child extends Parent {
 	void show() throws IOException {
 		System.out.println("child");
 	}
+	Integer getValue() { return 20; }
 }
