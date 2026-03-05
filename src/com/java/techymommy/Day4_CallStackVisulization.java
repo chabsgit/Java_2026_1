@@ -16,7 +16,7 @@ class parent {
 }
 
 class child extends parent {
-	void get() {
+	protected void get() {
 		System.out.println("Child get method called");
 	}
 
